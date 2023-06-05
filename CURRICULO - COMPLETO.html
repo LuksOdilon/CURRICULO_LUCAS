@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Currículo - Lucas Odilon</title>
+    <script>
+        window.onload = carousel
+        function carousel() {
+            const activeIndex = 0;
+            const slides = document.querySelectorAll('.carousel-item')
+            const carouselButtonsContainer = document.querySelector('#carousel-nav')
+
+            createCarouselButtons(carouselButtonsContainer, slides)
+        }
+        function createCarouselButtons(element, slides) {
+            for(let i = 0; i < slides.length; i++) {
+                const slide = slides[i]
+                const button = document.createElement('button')
+                
+                button.classList.add('carousel-button')
+                button.addEventListener('click', (e) => handleCarouselSlide(e, i))
+
+                if(i == 0){
+                    button.classList.add('active')
+                    slides[i].classList.add('active')
+                }
+                element.appendChild(button)
+            }
+        }
+        function handleCarouselSlide(event, index) {
+            const isFirstElement = index == 0;
+            const element = document.querySelector('.carousel')
+            const slide = document.querySelectorAll('.carousel-item')[index]
+            const translateXBaseValue = 610;
+            const translateXValue = isFirstElement? 0 : translateXBaseValue * index
+
+            element.style.transform = `translateX(-${translateXValue}px)`
+            element.style.position = "relative";
+
+            removeActiveFromAllSlides()
+            event.target.classList.add('active')
+            slide.classList.add('active')
+        }
+        function removeActiveFromAllSlides() {
+            const slides = document.querySelectorAll('.carousel-button.active')
+            for(let i = 0; i < slides.length; i++) {
+                const slide = slides[i]
+                slide.classList.remove('active')
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+        *, *::after, *::before {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #DEDEDE;
+            color: #535353;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            row-gap: 1rem;
+            flex: 1;
+            padding: 5rem 1rem 0 1rem;
+        }
+
+        .container-left {
+            flex: 2;
+        }
+
+        .container-right {
+            flex: 1;
+        }
+
+        img.photo {
+            width: 350px;
+            border-radius: 50%;
+            transition: .2s;
+        }
+
+        img.photo:hover {
+            border-radius: 5%;
+        }
+
+
+        .container-left .content {
+            width: 700px;
+            overflow: hidden;
+        }
+
+        .content h1 {
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .content h3 {
+            text-align: center;
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .content h1, .content h3 {
+            color: #252525;
+        }
+        .content p {
+            white-space: break-spaces;
+        }
+        .carousel {
+            display: flex;
+            column-gap: 20px;
+            transition: all 0.25s ease 0s;
+            padding-left: 30px;
+        }
+        .container-carousel {
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .container-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset -20px 0px 13px #DEDEDE;
+        }
+
+        .container-carousel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 99;
+            box-shadow: inset 20px 0px 13px #DEDEDE;
+        }
+
+        .carousel-item {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            min-width: 600px;
+            max-height: 320px;
+        }
+
+        .carousel-nav {
+            z-index: 999;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+            align-content: center;
+            padding: 10px 0 10px 0;
+        }
+
+        .carousel-button {
+            width: 20px;
+            height: 20px;
+            border: none;
+            background-color: #252525;
+            border: 5px solid #252525;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .carousel-button:hover {
+            background-color: gray;
+        }
+
+        .carousel-button.active {
+            background-color: white;
+        }
+
+        .legend {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+   <div class="wrapper">
+    <div class="container-left">
+        <div class="content">
+            <h1>Lucas Odilon de Araujo Cavalcanti</h1>
+        </div>
+        <div class="content container-carousel">
+            <div class="carousel-nav" id="carousel-nav"></div>
+            <div class="carousel">
+                <div class="carousel-item carousel-item-1">
+                    <h3>Informações</h3>
+                    <p>
+<span class="legend">Idade</span>: 25 Anos
+<span class="legend">Estado Civil</span>: Solteiro
+<span class="legend">Naturalidade</span>: Recife, PE
+<span class="legend">E-mail</span>: lucasodilon10@gmail.com
+<span class="legend">Contato</span>: (81) 987006762
+                    </p>
+                </div>  
+                <div class="carousel-item carousel-item-2">
+                    <h3>Objetivos</h3>
+                    <p>
+Desejo fazer parte da equipe da empresa oferecendo o meu melhor.
+Tenho facilidade no trabalho em equipe, iniciativa de buscar aprendizado e experiência.
+                    </p>
+                </div> 
+                <div class="carousel-item carousel-item-3">
+                    <h3>Formação</h3>
+                    <p>
+Ensino médio completo (Concluído em dezembro de 2016)
+Curso básico securitário pela Funenseg (Concluído em Setembro de 2017)
+Curso técnico em administração (Concluído em setembro de 2018)
+Curso superior em Analise e Desenvolvimento de Sistemas (Cursando o primeiro período)
+                    </p>
+                </div> 
+                <div class="carousel-item carousel-item-4">
+                    <h3>Experiência Profissional</h3>
+                    <p>
+<span class="legend">Empresa</span>: Almeida Barros Corretora de Seguros
+Estágio como calculista de seguros (Outubro de 2017 até março de 2020)
+<span class="legend">Função</span>: Administração geral da empresa, calculos de seguro novos e renovação. Pendências e emissões de apólices
+atendimento aos corretores e clientes. Comissões e pagamento de parcelas.
+
+<span class="legend">Empresa</span>: Metta Corretora de Seguros
+Auxiliar adiministrativo (Fevereiro de 2021 até hoje)
+<span class="legend">Função</span>: Administração geral da Empresa. Cotar todos os seguros novos e renovações de automóvel e ramos elementares. Responsável em atender todos os produtores da empresa tirando suas dúvidas e auxiliando para fechar novos seguros.
+                    </p>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="container-right">
+        <img 
+            class="photo"
+            src="https://i.imgur.com/2v3Z5Uq.png" 
+            alt="Lucas Odilon"
+        >
+    </div>
+   </div>
+</body>
+</html>
